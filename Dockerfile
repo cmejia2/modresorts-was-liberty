@@ -5,7 +5,8 @@
 #IMAGE: Get the base image for Liberty
 FROM websphere-liberty:webProfile7
 
-COPY --chown=1001:0 ./server.xml /config
+# COPY --chown=1001:0 ./server.xml /config
+COPY ./server.xml /config
 
 # Optional functionality
 ARG SSL=true
@@ -14,7 +15,8 @@ ARG MP_MONITORING=true
 ARG HTTP_ENDPOINT=false
 
 #BINARIES: Add in all necessary application binaries
-COPY --chown=1001:0 Dockerfile ./binary/application/* /config/apps/
+# COPY --chown=1001:0 Dockerfile ./binary/application/* /config/apps/
+COPY Dockerfile ./binary/application/* /config/apps/
 
 
 USER root
