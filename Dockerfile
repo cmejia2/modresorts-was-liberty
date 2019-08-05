@@ -15,7 +15,7 @@ ARG MP_MONITORING=true
 ARG HTTP_ENDPOINT=false
 
 #BINARIES: Add in all necessary application binaries
-# COPY --chown=1001:0 Dockerfile ./binary/application/* /config/apps/
+COPY --chown=1001:0 Dockerfile ./binary/application/* /config/apps/
 COPY Dockerfile ./binary/application/* /config/apps/
 
 
