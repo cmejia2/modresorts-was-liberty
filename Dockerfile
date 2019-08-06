@@ -26,7 +26,14 @@ USER root
 RUN apt-get update && apt-get dist-upgrade -y \
 && rm -rf /var/lib/apt/lists/* 
 
+ENV HOME /home/default
+USER root
+RUN chmod g+w /config/apps
+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/lib:/opt/ibm/wlp/usr/extension/liberty_dc/toolkit/lib/lx8266 \ JVM_ARGS="$JVM_ARGS -agentlib:am_ibm_16=defaultServer -Xbootclasspath/p:/opt/ibm/wlp/usr/extension/liberty_dc/toolkit/lib/bcm-bootstrap.jar -Xverbosegclog:/logs/gc.log,1,10000 -verbosegc -Djava.security.policy=/opt/ibm/wlp/usr/extension/liberty_dc/itcamdc/etc/datacollector.policy -Dliberty.home=/opt/ibm/wlp"
+
 USER 1001
+EXPOSE 9080
 RUN configure.sh
 
 # Upgrade to production license if URL to JAR provided
